@@ -1,6 +1,11 @@
+import { useContext } from "react"
+import { todoContext } from "../utils/Context"
 
 
 const Input = () => {
+
+  const handleTodo = useContext(todoContext)
+  console.log(handleTodo)
    const handleAdd = ( )=>{
 
    }
