@@ -10,6 +10,7 @@ type TodoContextProvider = {
     todo: Todo[];
     handleTodo: (task: string) => void;
     handleToggleItems: (id: string) => void;
+    handleDeleteItem: (id:string) => void;
 }
 
 export type Todo = {
@@ -48,9 +49,20 @@ export const TodoContextProvider = ({ children }: TodoProviderProps) => {
         })
     }
 
+    const handleDeleteItem = (id:string) =>{
+setTodo((prev)=> { 
+    const newTodos = prev.filter((r)=>{
+       return r.id != id
+    })
+    return newTodos
 
 
-    return <todoContext.Provider value={{ todo, handleTodo, handleToggleItems }}>
+})
+    }
+
+
+
+    return <todoContext.Provider value={{ todo, handleTodo, handleToggleItems, handleDeleteItem}}>
         {children}
     </todoContext.Provider>
 }
