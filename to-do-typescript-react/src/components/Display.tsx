@@ -1,26 +1,32 @@
 import React, { useContext, useState } from 'react'
-import { todoContext } from '../utils/Context'
+import { Todo, todoContext } from '../utils/Context'
 
 const Display = () => {
-    const Todos = useContext(todoContext)
-    const todoList = Todos?.todo;
-    // const handleTodos = Todos?.handleTodo;
-    
-    const [bool,setBool] = useState(false)
+  const Todos = useContext(todoContext)
+  const todoList = Todos?.todo;
+  const handleToggle = Todos?.handleToggleItems
+  // const handleTodos = Todos?.handleTodo;
 
-    const handleToggle = (id:string ) =>{
-        // handleTodos
-    }
+  // const [bool,setBool] = useState(false)
+  console.log(todoList)
 
   return (
     <div>
-        {
-  todoList?.map((r)=><div className='flex'>
-    <input type="checkbox" onClick={()=>handleToggle(r.id)}/>
-    <div>{r.task}</div>
-    </div>)
-}
-        
+      {
+        todoList?.map((r: Todo) => {
+          return <li className='list-none'>
+            <input type="checkbox"
+              checked={r.completed}
+              onChange={() => handleToggle(r?.id)} 
+              />
+            <label>{r?.task}</label>
+            {r.completed ? <button className='bg-red-500 p-1 ml-10'>Delete</button>: console.log("done")}
+          </li>
+        }
+
+        )
+      }
+
     </div>
   )
 }

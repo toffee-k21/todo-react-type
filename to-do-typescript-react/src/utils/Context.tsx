@@ -12,7 +12,7 @@ type TodoContextProvider = {
     handleToggleItems: (id: string) => void;
 }
 
-type Todo = {
+export type Todo = {
     id: string;
     task: string;
     completed: boolean,
@@ -36,16 +36,18 @@ export const TodoContextProvider = ({ children }: TodoProviderProps) => {
         })
     }
 
-    const handleToggleItems = (id: string):void => {
+    const handleToggleItems = (id: string) => {
         setTodo((prev) => {
-            let newTodos = prev.map((t) => {
-                if (t.id == id) {
-                    return { ...t, completed: !t.completed }
+            let newTodos = prev.map((todo) => {
+                if (todo.id == id) {
+                    return { ...todo, completed: !todo.completed }
                 }
+                else return todo
             })
-        }
-    )
-}
+            return newTodos
+        })
+    }
+
 
 
     return <todoContext.Provider value={{ todo, handleTodo, handleToggleItems }}>
