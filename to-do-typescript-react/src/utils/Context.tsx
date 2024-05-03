@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState } from "react";
+import { ReactNode, createContext, useContext, useState } from "react";
 
 export const todoContext = createContext<TodoContextProvider | null>(null);
 
@@ -11,6 +11,7 @@ type TodoContextProvider = {
     handleTodo: (task: string) => void;
     handleToggleItems: (id: string) => void;
     handleDeleteItem: (id:string) => void;
+    // useList: 
 }
 
 export type Todo = {
@@ -56,11 +57,10 @@ setTodo((prev)=> {
     })
     return newTodos
 
-
 })
     }
 
-
+    // const useList = useContext(todoContext)
 
     return <todoContext.Provider value={{ todo, handleTodo, handleToggleItems, handleDeleteItem}}>
         {children}

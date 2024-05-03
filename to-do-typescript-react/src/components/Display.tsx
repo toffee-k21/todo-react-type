@@ -1,15 +1,35 @@
 import  { useContext} from 'react'
 import { Todo, todoContext } from '../utils/Context'
+import { useSearchParams } from 'react-router-dom'
 
 const Display = () => {
   const Todos = useContext(todoContext)
   const {todo,handleToggleItems,handleDeleteItem} = Todos!
 
+const  [searchParams] = useSearchParams()//using useSearchParams hooks will re render my component
+
+const params = searchParams.get("todos");
+
+let filterData = todo;
+
+if(params == "active"){
+ filterData = filterData.filter((r)=>{
+  return r.completed == false
+})}
+if(params == "completed"){
+ filterData = filterData.filter((r)=>{
+  return r.completed == true
+})}
+else{
+ filterData = filterData.map((r)=>{
+  return r
+})}
+
 
   return (
     <div>
             {
-        todo?.map((r: Todo) => {
+        filterData?.map((r: Todo) => {
           return <li className='list-none'>
             <input type="checkbox"
               checked={r.completed}

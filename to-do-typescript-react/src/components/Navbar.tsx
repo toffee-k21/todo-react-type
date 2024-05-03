@@ -7,6 +7,7 @@ const Navbar = () => {
             <li><Link to={"/"}>All</Link></li>
             <li><Link to={"/?todos=active"}>Active</Link></li>
             <li><Link to={"/?todos=completed"}>Completed</Link></li>
+            
         </ul>
     </div>
   )
