@@ -26,8 +26,10 @@ export const TodoContextProvider = ({ children }: TodoProviderProps) => {
 useEffect(()=>{
     // if(localStorage != [])
 //         console.log(localStorage)
-//   if (localStorage !== null) JSON.parse(localStorage.getItem("todo"))
+//   if (localStorage.getItem("todo") !== null) JSON.parse(localStorage.getItem("todo"))
 //     else{console.log("err")}
+// note: localStorage.getItem("todo") direct use krne s ts clear nhi kr paa rha type so stroe it in variable
+//GPT: However, this type narrowing only applies to the code block where the check is performed. If you use localStorage.getItem('todo') directly without storing it in a variable, TypeScript doesn't have a clear view of where the null check is applied. Therefore, it doesn't perform the type narrowing automatically in subsequent usages.
 
 //  /gpt
 // Retrieve JSON string from localStorage
