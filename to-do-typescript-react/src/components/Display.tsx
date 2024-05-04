@@ -25,6 +25,11 @@ else{
   return r
 })}
 
+// const func = (t:Todo[] )=>{
+// localStorage.setItem("todo",JSON.stringify(t));
+// }
+
+
 
   return (
     <div>
@@ -39,10 +44,11 @@ else{
             {r.completed ? <button onClick={() => handleDeleteItem(r?.id)} className='bg-red-500 p-1 ml-10'>Delete</button>: <button></button>}
           </li>
         }
+        
+      )
+    }
 
-        )
-      }
-
+    {/* <button onClick={()=>func(todo)}>save</button> */}
     </div>
   )
 }

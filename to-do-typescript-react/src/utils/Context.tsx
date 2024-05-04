@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext, useState } from "react";
+import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 
 export const todoContext = createContext<TodoContextProvider | null>(null);
 
@@ -23,6 +23,25 @@ export type Todo = {
 
 export const TodoContextProvider = ({ children }: TodoProviderProps) => {
     const [todo, setTodo] = useState<Todo[]>([])
+useEffect(()=>{
+    // if(localStorage != [])
+//         console.log(localStorage)
+//   if (localStorage !== null) JSON.parse(localStorage.getItem("todo"))
+//     else{console.log("err")}
+
+//  /gpt
+// Retrieve JSON string from localStorage
+let jsonStringNullable: string | null = localStorage.getItem('todo');
+
+if (jsonStringNullable !== null) {
+    // Parsing JSON string to object
+    let jsonObject = JSON.parse(jsonStringNullable);
+    setTodo(jsonObject); // Output: { key1: 'value1', key2: 'value2', key3: 'value3' }
+
+} else {
+    console.error('JSON string is null or key does not exist in localStorage');
+}
+},[])
 
     const handleTodo = (task: string): void => {
         setTodo((prev) => {
@@ -33,7 +52,8 @@ export const TodoContextProvider = ({ children }: TodoProviderProps) => {
                 createdAt: new Date()
             },
             ...prev]
-
+            localStorage.setItem("todo", JSON.stringify(todo));
+            //ishki position bht matter kregi ye agr bhr rkh loge toh emty hone pr fir execute hogi ar localstorage emty kr degi. ishliye on refresh ye call na ho ishliye function k andr daal diya ....demo bhi diya hai ek save btn bnya hoga display me.
             return newTodo
         })
     }
@@ -46,6 +66,7 @@ export const TodoContextProvider = ({ children }: TodoProviderProps) => {
                 }
                 else return todo
             })
+            localStorage.setItem("todo", JSON.stringify(todo));
             return newTodos
         })
     }
