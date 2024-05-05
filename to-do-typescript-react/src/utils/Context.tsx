@@ -22,8 +22,17 @@ export type Todo = {
 }
 
 export const TodoContextProvider = ({ children }: TodoProviderProps) => {
-    const [todo, setTodo] = useState<Todo[]>([])
-useEffect(()=>{
+    const [todo, setTodo] = useState<Todo[]>(() =>{
+        try {
+          const st =  localStorage.getItem("todo") || "[]"
+          return JSON.parse(st) as Todo[]
+            
+        } catch (error) {
+            return []
+        }
+    }
+    )
+// useEffect(()=>{
     // if(localStorage != [])
 //         console.log(localStorage)
 //   if (localStorage.getItem("todo") !== null) JSON.parse(localStorage.getItem("todo"))
@@ -33,17 +42,17 @@ useEffect(()=>{
 
 //  /gpt
 // Retrieve JSON string from localStorage
-let jsonStringNullable: string | null = localStorage.getItem('todo');
+// let jsonStringNullable: string | null = localStorage.getItem('todo');
 
-if (jsonStringNullable !== null) {
-    // Parsing JSON string to object
-    let jsonObject = JSON.parse(jsonStringNullable);
-    setTodo(jsonObject); // Output: { key1: 'value1', key2: 'value2', key3: 'value3' }
+// if (jsonStringNullable !== null) {
+//     // Parsing JSON string to object
+//     let jsonObject = JSON.parse(jsonStringNullable);
+//     setTodo(jsonObject); // Output: { key1: 'value1', key2: 'value2', key3: 'value3' }
 
-} else {
-    console.error('JSON string is null or key does not exist in localStorage');
-}
-},[])
+// } else {
+//     console.error('JSON string is null or key does not exist in localStorage');
+// }
+// },[])
 
     const handleTodo = (task: string): void => {
         setTodo((prev) => {
