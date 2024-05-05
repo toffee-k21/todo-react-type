@@ -63,7 +63,7 @@ export const TodoContextProvider = ({ children }: TodoProviderProps) => {
                 createdAt: new Date()
             },
             ...prev]
-            localStorage.setItem("todo", JSON.stringify(todo));
+            localStorage.setItem("todo", JSON.stringify(newTodo));
             //ishki position bht matter kregi ye agr bhr rkh loge toh emty hone pr fir execute hogi ar localstorage emty kr degi. ishliye on refresh ye call na ho ishliye function k andr daal diya ....demo bhi diya hai ek save btn bnya hoga display me.
             return newTodo
         })
@@ -77,7 +77,7 @@ export const TodoContextProvider = ({ children }: TodoProviderProps) => {
                 }
                 else return todo
             })
-            localStorage.setItem("todo", JSON.stringify(todo));
+            localStorage.setItem("todo", JSON.stringify(newTodos));
             return newTodos
         })
     }
@@ -87,6 +87,7 @@ setTodo((prev)=> {
     const newTodos = prev.filter((r)=>{
        return r.id != id
     })
+    localStorage.setItem("todo",JSON.stringify(newTodos))
     return newTodos
 
 })
